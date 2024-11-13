@@ -1,8 +1,10 @@
 import random
+import time
 
 from selenium.webdriver.common.by import By
-from generator.generator import generated_person
-from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators
+from generator.generator import generated_person, generated_person_webtable_page
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
+	WebTablePageLocators
 from pages.base_page import BasePage
 
 
@@ -78,3 +80,27 @@ class RadioButtonPage(BasePage):
 
 	def get_output_result(self):
 		return self.element_is_present(self.locators.OUTPUT_RESULT).text
+
+class WebTablePage(BasePage):
+	locators = WebTablePageLocators()
+
+	def add_button(self):
+		self.element_is_visible(self.locators.ADD_BUTTON).click()
+
+	def fill_all_fields_on_web_table_page(self):
+		person_info = next(generated_person_webtable_page())
+		first_name = person_info.first_name
+		last_name = person_info.last_name
+		email = person_info.email
+		age = person_info.age
+		salary = person_info.salary
+		department = person_info.department
+		self.element_is_visible(self.locators.FIRSTNAME_INPUT).send_keys(first_name)
+		self.element_is_visible(self.locators.LASTNAME_INPUT).send_keys(last_name)
+		self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
+		self.element_is_visible(self.locators.AGE_INPUT).send_keys(str(age))
+		self.element_is_visible(self.locators.SALARY_INPUT).send_keys(str(salary))
+		self.element_is_visible(self.locators.DEPARTMENT_INPUT).send_keys(department)
+		time.sleep(1)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return first_name, last_name, email, age, salary, department
