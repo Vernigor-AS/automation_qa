@@ -34,6 +34,7 @@ class RadioButtonPageLocators:
     OUTPUT_RESULT = (By.CSS_SELECTOR, '.text-success')
 
 class WebTablePageLocators:
+    #add person
     ADD_BUTTON = (By.CSS_SELECTOR, "#addNewRecordButton")
     FIRSTNAME_INPUT = (By.CSS_SELECTOR, "#firstName")
     LASTNAME_INPUT = (By.CSS_SELECTOR, "#lastName")
@@ -42,9 +43,14 @@ class WebTablePageLocators:
     SALARY_INPUT = (By.CSS_SELECTOR, "#salary")
     DEPARTMENT_INPUT = (By.CSS_SELECTOR, "#department")
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "#submit")
+
     SEARCH_INPUT = (By.CSS_SELECTOR, "#searchBox")
     SELECT_ROWS = (By.CSS_SELECTOR, "span select")
     SELECT_VALUE_5 = (By.CSS_SELECTOR, "span select [value='5']")
     SELECT_VALUE_10 = (By.CSS_SELECTOR, "span select [value='10']")
     SELECT_VALUE_20 = (By.CSS_SELECTOR, "span select [value='20']")
     SELECT_VALUE_25 = (By.CSS_SELECTOR, "span select [value='25']")
+    #table
+    FULL_PEOPLE_LIST = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
+    DELETE_BUTTON = (By.CSS_SELECTOR, "span[title='Delete']")
+    PARENT_ROW = ".//ancestor::div[@class='rt-tr-group']"

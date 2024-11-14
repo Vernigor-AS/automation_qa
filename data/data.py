@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Person:
     full_name: str = None
@@ -11,4 +12,3 @@ class Person:
     permanent_address: str = None
     salary: int = None
     department: str = None
-

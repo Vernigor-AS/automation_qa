@@ -1,4 +1,8 @@
 import time
+
+from faker.generator import random
+
+from conftest import driver
 from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
 
 
@@ -47,4 +51,17 @@ class TestElements:
 			web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
 			web_table_page.open()
 			web_table_page.add_button()
-			web_table_page.fill_all_fields_on_web_table_page()
+			new_person = web_table_page.web_table_add_new_person()
+			table_result = web_table_page.check_new_added_person()
+			print(new_person)
+			print(table_result)
+			assert new_person in table_result
+
+		def test_web_table_search_person(self, driver):
+			web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+			web_table_page.open()
+			web_table_page.add_button()
+			last_name = web_table_page.web_table_add_new_person()[1]
+			web_table_page.search_person(last_name)
+			table_result = web_table_page.check_search_person()
+			assert last_name in table_result, "Искомый человек не отображается в таблице "
