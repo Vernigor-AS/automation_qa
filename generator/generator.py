@@ -4,7 +4,7 @@ from data.data import Person
 from faker import Faker
 
 
-faker_ru = Faker(['ru_RU', 'en_US'])
+faker_ru = Faker(['ru_RU'])
 Faker.seed()
 
 

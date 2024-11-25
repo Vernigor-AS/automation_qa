@@ -1,6 +1,5 @@
 import random
 
-
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person, generated_person_webtable_page
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
@@ -102,8 +101,8 @@ class WebTablePage(BasePage):
 			self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
 			self.element_is_visible(self.locators.AGE_INPUT).send_keys(str(age))
 			self.element_is_visible(self.locators.SALARY_INPUT).send_keys(str(salary))
-			self.element_is_visible(self.locators.DEPARTMENT_INPUT).send_keys(department)
-			self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+			self.element_is_visible(self.locators.DEPARTMENT_INPUT,).send_keys(department)
+			self.element_is_visible(self.locators.SUBMIT_BUTTON,).click()
 			count -=1
 		return [first_name, last_name, str(age), email, str(salary), department]
 
@@ -121,3 +120,87 @@ class WebTablePage(BasePage):
 		delete_button = self.element_is_present(self.locators.DELETE_BUTTON)
 		row = delete_button.find_element(By.XPATH, self.locators.PARENT_ROW)
 		return row.text.splitlines()
+
+	def update_person_info_first_name(self):
+		person_info  = next(generated_person_webtable_page())
+		first_name = person_info.first_name
+		self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+		self.element_is_visible(self.locators.FIRSTNAME_INPUT).clear()
+		self.element_is_visible(self.locators.FIRSTNAME_INPUT).send_keys(first_name)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return first_name
+
+	def update_person_info_last_name(self):
+		person_info = next(generated_person_webtable_page())
+		last_name = person_info.last_name
+		self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+		self.element_is_visible(self.locators.LASTNAME_INPUT).clear()
+		self.element_is_visible(self.locators.LASTNAME_INPUT).send_keys(last_name)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return last_name
+
+
+	def update_person_info_email(self):
+		person_info = next(generated_person_webtable_page())
+		email = person_info.email
+		self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+		self.element_is_visible(self.locators.EMAIL_INPUT).clear()
+		self.element_is_visible(self.locators.EMAIL_INPUT).send_keys(email)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return email
+
+	def update_person_info_age(self):
+		person_info = next(generated_person_webtable_page())
+		age = person_info.age
+		self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+		self.element_is_visible(self.locators.AGE_INPUT).clear()
+		self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return str(age)
+
+	def update_person_info_salary(self):
+		person_info = next(generated_person_webtable_page())
+		salary = person_info.salary
+		self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+		self.element_is_visible(self.locators.SALARY_INPUT).clear()
+		self.element_is_visible(self.locators.SALARY_INPUT).send_keys(salary)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return str(salary)
+
+	def update_person_info_department(self):
+		person_info = next(generated_person_webtable_page())
+		department = person_info.department
+		self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+		self.element_is_visible(self.locators.DEPARTMENT_INPUT).clear()
+		self.element_is_visible(self.locators.DEPARTMENT_INPUT).send_keys(department)
+		self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+		return department
+
+	def delete_person_info(self):
+		self.element_is_visible(self.locators.DELETE_BUTTON).click()
+
+	def check_the_users_card_has_been_deleted(self):
+		return self.element_is_present(self.locators.NO_ROWS_FOUND).text
+
+	def select_up_to_rows(self):
+		count = [5, 10, 20, 25, 100]
+		data = []
+		for x in count :
+			count_rows = (self.go_to_element(self.element_is_visible
+											(self.locators.SELECT_ROWS)))
+			if count_rows is None:
+				print("Элемент не найден или не виден")
+				continue
+			count_rows.click()
+			self.element_is_visible(By.CSS_SELECTOR, f"option[value='{x}']").click()
+			data.append(self.check_count_rows)
+		return data
+
+	def check_count_rows(self):
+		list_rows = self.element_are_present(self.locators.FULL_PEOPLE_LIST)
+		return len(list_rows)
+
+
+
+
+

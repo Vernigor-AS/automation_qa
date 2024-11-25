@@ -45,12 +45,21 @@ class WebTablePageLocators:
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "#submit")
 
     SEARCH_INPUT = (By.CSS_SELECTOR, "#searchBox")
-    SELECT_ROWS = (By.CSS_SELECTOR, "span select")
+    SELECT_ROWS = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
     SELECT_VALUE_5 = (By.CSS_SELECTOR, "span select [value='5']")
     SELECT_VALUE_10 = (By.CSS_SELECTOR, "span select [value='10']")
     SELECT_VALUE_20 = (By.CSS_SELECTOR, "span select [value='20']")
     SELECT_VALUE_25 = (By.CSS_SELECTOR, "span select [value='25']")
+    SELECT_VALUE_100 = (By.CSS_SELECTOR, "span select [value='100']")
     #table
     FULL_PEOPLE_LIST = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
     DELETE_BUTTON = (By.CSS_SELECTOR, "span[title='Delete']")
-    PARENT_ROW = ".//ancestor::div[@class='rt-tr-group']"
+    PARENT_ROW = "div[class='rt-tr-group']"
+    NO_ROWS_FOUND = (By.CSS_SELECTOR, "div[class='rt-noData']")
+    COUNT_ROW_LIST = (By.CSS_SELECTOR, "")
+
+    #update
+    UPDATE_BUTTON = (By.CSS_SELECTOR, "span[title='Edit']")
+
+
+
