@@ -1,9 +1,10 @@
 import time
+from unittest.mock import right
 
 import pytest
 
 from conftest import driver
-from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
 
 
 class TestElements:
@@ -14,7 +15,6 @@ class TestElements:
 			text_box_page.open()
 			full_name, email, current_address, permanent_address = text_box_page.fill_in_all_fields()
 			output_name, output_email, output_current_address, output_permanent_address = text_box_page.check_text()
-			time.sleep(5)
 			assert full_name == output_name, "Полное имя не совпадает"
 			assert email == output_email, "email не совпадает"
 			assert current_address == output_current_address, "Текущий адрес не совпадает"
@@ -92,4 +92,16 @@ class TestElements:
 			web_table_page.open()
 			count = web_table_page.select_up_to_rows()
 			assert count == [5, 10, 20, 25, 100], "Невозможно выбрать больше 20 строк"
-			
+
+	class TestButtonsPage:
+
+		def test_different_click_on_the_buttons(self, driver):
+			button_page = ButtonsPage(driver, 'https://demoqa.com/buttons')
+			button_page.open()
+			double = button_page.tap_on_the_double_click_button('double')
+			right = button_page.tap_on_the_right_click_button('right')
+			click = button_page.tap_on_the_click_me_button('click')
+			assert double == 'You have done a double click' , "Текст о двойном нажатии отсутствует"
+			assert right == 'You have done a right click', "Текст о нажатии правой кнопки мыши отсутствует"
+			assert click == 'You have done a dynamic click', "Тест о нажатии отсутствует"
+

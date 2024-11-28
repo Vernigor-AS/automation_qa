@@ -1,9 +1,10 @@
 import random
 
+
 from selenium.webdriver.common.by import By
 from generator.generator import generated_person, generated_person_webtable_page
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-	WebTablePageLocators
+	WebTablePageLocators, ButtonsPageLocators
 from pages.base_page import BasePage
 
 
@@ -200,7 +201,26 @@ class WebTablePage(BasePage):
 		list_rows = self.element_are_present(self.locators.FULL_PEOPLE_LIST)
 		return len(list_rows)
 
+class ButtonsPage(BasePage):
+	locators = ButtonsPageLocators()
+
+	def tap_on_the_double_click_button(self, type_click):
+		if type_click == 'double':
+			double_click_button = self.element_is_visible(self.locators.DOUBLE_CLICK_BUTTON)
+			self.action_double_click(double_click_button)
+		return self.check_clicked_on_the_button(self.locators.DOUBLE_CLICK_TEXT)
+
+	def tap_on_the_right_click_button(self, type_click):
+		if type_click == 'right':
+			right_click_button = self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON)
+			self.action_right_click(right_click_button)
+		return self.check_clicked_on_the_button(self.locators.RIGHT_CLICK_TEXT)
+
+	def tap_on_the_click_me_button(self, type_click):
+		if type_click == 'click':
+			self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
+		return self.check_clicked_on_the_button(self.locators.CLICK_ME_TEXT)
 
 
-
-
+	def check_clicked_on_the_button(self, element):
+		return self.element_is_present(element).text
