@@ -1,10 +1,10 @@
 import time
-from unittest.mock import right
+
 
 import pytest
 
 from conftest import driver
-from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
+from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage
 
 
 class TestElements:
@@ -105,3 +105,60 @@ class TestElements:
 			assert right == 'You have done a right click', "Текст о нажатии правой кнопки мыши отсутствует"
 			assert click == 'You have done a dynamic click', "Тест о нажатии отсутствует"
 
+class TestLinksPage:
+
+	@pytest.mark.need_rewiev
+	def test_home_and_dynamic_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		home_link = links_page.go_to_home_link(driver)
+		time.sleep(3)
+		dynamic_link = links_page.go_to_dynamic_link(driver)
+		time.sleep(3)
+		"""Две ссылки на одну и ту же страницу"""
+
+		assert home_link == "https://demoqa.com/", "Домашняя страница не отображается"
+		assert dynamic_link == "https://demoqa.com/", "Домашняя страница не отображается"
+
+
+	def test_will_send_an_api_call_created_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_created_api_link()
+		assert '201' in check_status.text
+
+	def test_will_send_an_api_call_no_content_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_no_content_link()
+		assert '204' in check_status.text
+
+	def test_will_send_an_api_call_moved_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_moved_link()
+		assert '301' in check_status.text
+
+	def test_will_send_an_api_call_bad_request_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_bad_request_link()
+		assert '400' in check_status.text
+
+	def test_will_send_an_api_call_unauthorized_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_unauthorized_link()
+		assert '401' in check_status.text
+
+	def test_will_send_an_api_call_forbidden_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_forbidden_link()
+		assert '403' in check_status.text
+
+	def test_will_send_an_api_call_not_found_link(self, driver):
+		links_page = LinksPage(driver, 'https://demoqa.com/links')
+		links_page.open()
+		check_status = links_page.check_not_found_link()
+		assert '404' in check_status.text

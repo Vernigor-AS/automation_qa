@@ -71,6 +71,17 @@ class ButtonsPageLocators:
     RIGHT_CLICK_TEXT = (By.XPATH, "//p[text()='You have done a right click']")
     CLICK_ME_TEXT = (By.XPATH, "//p[text()='You have done a dynamic click']")
 
+class LinksPageLocators:
+    HOME_PAGE_LINK = (By.CSS_SELECTOR, "a[id='simpleLink']")
+    HOME_PAGE_DYNAMIC_LINK = (By.CSS_SELECTOR, "a[id='dynamicLink']")
+    API_CALL_CREATED = (By.CSS_SELECTOR, "a[id='created']")
+    API_CALL_NO_CONTENT = (By.CSS_SELECTOR, "a[id='no-content']")
+    API_CALL_MOVED = (By.CSS_SELECTOR, "a[id='moved']")
+    API_CALL_BAD_REQUEST = (By.CSS_SELECTOR, "a[id='bad-request']")
+    API_CALL_UNAUTHORIZED = (By.CSS_SELECTOR, "a[id='unauthorized']")
+    API_CALL_FORBIDDEN = (By.CSS_SELECTOR, "a[id='forbidden']")
+    API_CALL_NOT_FOUND = (By.CSS_SELECTOR, "a[id='invalid-url']")
+    LINK_RESPONSE_TEXT = (By.CSS_SELECTOR, "p[id='linkResponse']")
 
 
 

@@ -2,9 +2,11 @@ import random
 
 
 from selenium.webdriver.common.by import By
+
+from conftest import driver
 from generator.generator import generated_person, generated_person_webtable_page
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-	WebTablePageLocators, ButtonsPageLocators
+	WebTablePageLocators, ButtonsPageLocators, LinksPageLocators
 from pages.base_page import BasePage
 
 
@@ -224,3 +226,66 @@ class ButtonsPage(BasePage):
 
 	def check_clicked_on_the_button(self, element):
 		return self.element_is_present(element).text
+
+
+class LinksPage(BasePage):
+	locators = LinksPageLocators()
+
+
+	def go_to_home_link(self, driver):
+		home_link = self.element_is_visible(self.locators.HOME_PAGE_LINK)
+		home_link.click()
+		home_page_link = self.driver.window_handles
+		self.driver.switch_to.window(home_page_link[1])
+		url_home = self.driver.current_url
+		return url_home
+
+	def go_to_dynamic_link(self, driver):
+		dynamic_link = self.element_is_visible(self.locators.HOME_PAGE_DYNAMIC_LINK)
+		dynamic_link.click()
+		dynamic_page_link = self.driver.window_handles
+		self.driver.switch_to.window(dynamic_page_link[1])
+		dynamic_url = driver.current_url
+		return dynamic_url
+
+	def check_created_api_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_CREATED)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
+
+	def check_no_content_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_NO_CONTENT)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
+
+	def check_moved_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_MOVED)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
+
+	def check_bad_request_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_BAD_REQUEST)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
+
+	def check_unauthorized_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_UNAUTHORIZED)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
+
+	def check_forbidden_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_FORBIDDEN)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
+
+	def check_not_found_link(self):
+		link = self.element_is_visible(self.locators.API_CALL_NOT_FOUND)
+		link.click()
+		check_status = self.element_is_visible(self.locators.LINK_RESPONSE_TEXT)
+		return check_status
