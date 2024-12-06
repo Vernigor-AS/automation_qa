@@ -3,8 +3,9 @@ import time
 
 import pytest
 
-from conftest import driver
-from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage
+from tests.conftest import driver
+from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage, \
+	UploadAndDownload
 
 
 class TestElements:
@@ -162,3 +163,18 @@ class TestLinksPage:
 		links_page.open()
 		check_status = links_page.check_not_found_link()
 		assert '404' in check_status.text
+
+class TestUploadAndDownload:
+
+	def test_upload_file(self, driver):
+		upload_download_page = UploadAndDownload(driver, 'https://demoqa.com/upload-download')
+		upload_download_page.open()
+		file_name, result = upload_download_page.upload_file()
+		assert file_name == result, 'Файл не загружается'
+
+
+	def test_download_file(self, driver):
+		link = UploadAndDownload(driver, 'https://demoqa.com/upload-download')
+		link.open()
+		check = link.download_file()
+		assert check is True, 'Файл не скачивается'

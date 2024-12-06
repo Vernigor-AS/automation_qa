@@ -1,5 +1,5 @@
 import random
-
+import os
 from data.data import Person
 from faker import Faker
 
@@ -27,3 +27,9 @@ def generated_person_webtable_page():
         salary=random.randint(1, 8000000),
         department=faker_ru.job()
     )
+
+def generated_file():
+    path = f'{os.getcwd()}\\filetest{random.randint(0, 999)}.txt'
+    with open(path, "w+") as file:
+        file.write(f'Hello all{random.randint(0, 999)}')
+    return file.name, path

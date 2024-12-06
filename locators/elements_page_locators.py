@@ -83,6 +83,14 @@ class LinksPageLocators:
     API_CALL_NOT_FOUND = (By.CSS_SELECTOR, "a[id='invalid-url']")
     LINK_RESPONSE_TEXT = (By.CSS_SELECTOR, "p[id='linkResponse']")
 
+class UploadAndDownloadPageLocators:
+
+    UPLOAD_FILE = (By.CSS_SELECTOR, "input[id='uploadFile']")
+    UPLOADED_RESULT = (By.CSS_SELECTOR, "p[id='uploadedFilePath']")
+
+    DOWNLOAD_FILE = (By.CSS_SELECTOR, "a[id='downloadButton']")
+
+
 
 
 
