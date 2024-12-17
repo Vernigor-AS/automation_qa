@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date
 
 
 @dataclass
@@ -12,3 +13,5 @@ class Person:
     permanent_address: str = None
     salary: int = None
     department: str = None
+    mobile: str = None
+    birth: date = date
