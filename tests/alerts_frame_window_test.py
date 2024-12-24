@@ -1,6 +1,7 @@
 import time
 
-from pages.alerts_frame_window_page import BrowserWindowPage, AlertsWindowPage, FramesPage, NestedFramesPage
+from pages.alerts_frame_window_page import BrowserWindowPage, AlertsWindowPage, FramesPage, NestedFramesPage, \
+	ModalDialogsPage
 
 
 class TestAlertsFrameWindow:
@@ -72,3 +73,21 @@ class TestAlertsFrameWindow:
 			assert parent_frame == "Parent frame", "Рамка не отображается"
 			assert child_frame == "Child Iframe", "Вложенная рамка не отображается"
 
+
+	class TestModalDialogsPage:
+
+		def test_check_small_modal(self, driver):
+			modal_dialogs_page = ModalDialogsPage(driver, "https://demoqa.com/modal-dialogs")
+			modal_dialogs_page.open()
+			modal_title_text, modal_body_text, len_body_text = modal_dialogs_page.open_and_check_small_modal()
+			assert modal_title_text == "Small Modal", "Заголовок не представлен"
+			assert modal_body_text == "This is a small modal. It has very less content", "Текст не представлен"
+			assert len_body_text == 47, "Длина текста изменилась, проверить текст"
+
+		def test_check_large_modal(self, driver):
+			modal_dialogs_page = ModalDialogsPage(driver, "https://demoqa.com/modal-dialogs")
+			modal_dialogs_page.open()
+			modal_title_text, modal_body_text, len_body_text = modal_dialogs_page.open_and_check_large_modal()
+			assert modal_title_text == "Large Modal", "Заголовок не представлен"
+			assert modal_body_text is not None, "Текст отсутствует"
+			assert len_body_text == 574, "Длина текста изменилась, проверить текст"

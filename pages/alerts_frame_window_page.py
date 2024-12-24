@@ -1,7 +1,7 @@
 from faker.generator import random
 
 from locators.alerts_frame_window_locators import BrowserWindowPageLocators, AlertWindowPageLocators, \
-	FramesPageLocators, NestedFramesPageLocators
+	FramesPageLocators, NestedFramesPageLocators, ModalDialogsPageLocators
 from pages.base_page import BasePage
 
 
@@ -93,3 +93,23 @@ class NestedFramesPage(BasePage):
 		self.driver.switch_to.frame(child_frame)
 		child_text = self.element_is_present(self.locators.CHILD_TEXT).text
 		return parent_text, child_text
+
+class ModalDialogsPage(BasePage):
+
+	locators = ModalDialogsPageLocators()
+
+	def open_and_check_small_modal(self):
+		self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
+		title_text = self.element_is_visible(self.locators.TITLE_TEXT_MODAL).text[0:11]
+		body_text = self.element_is_visible(self.locators.TEXT_MODAL_BODY).text
+		len_body_text = len(body_text)
+		self.element_is_visible(self.locators.CLOSE_SMALL_MODAL_BUTTON).click()
+		return title_text, body_text, len_body_text
+
+	def open_and_check_large_modal(self):
+		self.element_is_visible(self.locators.LARGE_MODAL_BUTTON).click()
+		title_text = self.element_is_visible(self.locators.TITLE_TEXT_MODAL).text[0:11]
+		body_text = self.element_is_visible(self.locators.TEXT_MODAL_BODY).text
+		len_body_text = len(body_text)
+		self.element_is_visible(self.locators.CLOSE_LARGE_MODAL_BUTTON).click()
+		return title_text, body_text, len_body_text
