@@ -1,6 +1,6 @@
 import time
 
-from pages.alerts_frame_window_page import BrowserWindowPage, AlertsWindowPage, FramesPage
+from pages.alerts_frame_window_page import BrowserWindowPage, AlertsWindowPage, FramesPage, NestedFramesPage
 
 
 class TestAlertsFrameWindow:
@@ -54,13 +54,21 @@ class TestAlertsFrameWindow:
 			frame_page = FramesPage(driver, "https://demoqa.com/frames")
 			frame_page.open()
 			result_frame1 = frame_page.check_frame1('frame1')
-			assert result_frame1 == ('This is a sample page', '500px', '350px'), "Фрейм не отображается"
+			assert result_frame1 == ('This is a sample page', '500px', '350px'), "Рамка не отображается"
 
 		def test_frame2(self, driver):
 			frame_page = FramesPage(driver, "https://demoqa.com/frames")
 			frame_page.open()
 			result_frame2 = frame_page.check_frame2('frame2')
-			assert result_frame2 == ('This is a sample page', '100px', '100px'), "Фрейм не отображается"
+			assert result_frame2 == ('This is a sample page', '100px', '100px'), "Рамка не отображается"
 
 
+	class TestNestedFramesPage:
+
+		def test_nested_frames(self, driver):
+			nested_frame_page = NestedFramesPage(driver, "https://demoqa.com/nestedframes")
+			nested_frame_page.open()
+			parent_frame, child_frame = nested_frame_page.check_nested_frame()
+			assert parent_frame == "Parent frame", "Рамка не отображается"
+			assert child_frame == "Child Iframe", "Вложенная рамка не отображается"
 
