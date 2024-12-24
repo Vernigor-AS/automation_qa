@@ -1,3 +1,6 @@
+import random
+
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
@@ -36,6 +39,22 @@ class BasePage:
 
     def go_to_element(self, element):
         self.driver.execute_script(f'arguments[0].scrollIntoView();', element)
+
+    def check_alert(self):
+        return wait(self.driver, 10).until(EC.alert_is_present())
+
+    def handle_alert(self):
+        alert = self.check_alert()
+        alert_text = alert.text
+        action = random.choice(['accept', 'dismiss'])
+        if action == "accept":
+            alert.accept()
+            print("Alert accepted.")
+        elif action == "dismiss":
+            alert.dismiss()
+            print("Alert dismissed.")
+        return alert_text
+
 
     def action_double_click(self, element):
         action = ActionChains(self.driver)

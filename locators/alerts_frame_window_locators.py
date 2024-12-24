@@ -7,3 +7,20 @@ class BrowserWindowPageLocators:
 	NEW_WINDOW_BUTTON = (By.CSS_SELECTOR, "#windowButton")
 
 	TITLE_NEW_TAB = (By.CSS_SELECTOR, "#sampleHeading")
+
+class AlertWindowPageLocators:
+
+	ALERT_BUTTON = (By.CSS_SELECTOR, "button[id='alertButton']")
+	TIMER_ALERT_BUTTON = (By.CSS_SELECTOR, "button[id='timerAlertButton']")
+	CONFIRM_BUTTON = (By.CSS_SELECTOR, "button[id='confirmButton']")
+	PROMT_BUTTON = (By.CSS_SELECTOR, "button[id='promtButton']")
+
+	#alert result
+	TEXT_AFTER_CLOSE_ALERT = (By.CSS_SELECTOR, "span[id='confirmResult'")
+	TEXT_AFTER_INPUT_TEXT_ON_ALERT = (By.CSS_SELECTOR, "span[id='promptResult'")
+
+class FramesPageLocators:
+
+	BIG_FRAME = (By.CSS_SELECTOR, "iframe[id='frame1']")
+	SMALL_FRAME = (By.CSS_SELECTOR, "iframe[id='frame2']")
+	TITLE_FRAME = (By.CSS_SELECTOR, "#sampleHeading")
