@@ -2,7 +2,7 @@ import random
 import os
 from datetime import date
 
-from data.data import Person
+from data.data import Person, Color
 from faker import Faker
 
 
@@ -66,3 +66,8 @@ def generate_birth_date(max_year=2005):
             day = random.randint(1, 28)
     return date(year, month, day)
 
+def generated_color():
+    yield Color(
+        color_name=["Red", "Blue", "Green", "Yellow", "Purple", "Black",
+                    "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+    )

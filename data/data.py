@@ -15,3 +15,7 @@ class Person:
     department: str = None
     mobile: str = None
     birth: date = date
+
+@dataclass
+class Color:
+    color_name: list = None

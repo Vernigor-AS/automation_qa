@@ -1,4 +1,4 @@
-import time
+
 
 from pages.form_page import FormPage
 
