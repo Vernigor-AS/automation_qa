@@ -1,6 +1,6 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
 
 
 class TestWidget:
@@ -42,5 +42,18 @@ class TestWidget:
 			result_in_container = autocomplete_page.check_color_in_single()
 			assert color == result_in_container,  "Добавленных цветов нет в поле ввода"
 
+	class TestDatePickerPage:
 
+		def test_change_date(self, driver):
+			date_picker_page = DatePickerPage(driver, "https://demoqa.com/date-picker")
+			date_picker_page.open()
+			value_date_before, value_date_after = date_picker_page.select_date()
+			assert value_date_before != value_date_after, "Время и дата не изменились"
 
+		def test_change_date_and_time(self, driver):
+			date_picker_page = DatePickerPage(driver, "https://demoqa.com/date-picker")
+			date_picker_page.open()
+			value_date_before, value_date_after = date_picker_page.select_date_and_time()
+			print(value_date_before)
+			print(value_date_after)
+			assert value_date_before != value_date_after, "Время и дата не изменились"

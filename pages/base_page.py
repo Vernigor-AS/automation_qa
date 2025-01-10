@@ -1,10 +1,10 @@
 import random
 
-
+from select import select
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.support.select import Select
 from tests.conftest import driver
 
 
@@ -39,6 +39,14 @@ class BasePage:
 
     def go_to_element(self, element):
         self.driver.execute_script(f'arguments[0].scrollIntoView();', element)
+
+    def select_by_text(self, element, value):
+        select = Select(self.element_is_present(element))
+        select.select_by_visible_text(value)
+
+    def select_by_index(self, element, index):
+        select = Select(self.element_is_visible(element))
+        select.select_by_index(index)
 
     def check_alert(self):
         return wait(self.driver, 10).until(EC.alert_is_present())
