@@ -1,6 +1,6 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, ToolTips
 
 
 class TestWidget:
@@ -74,3 +74,16 @@ class TestWidget:
 			progress_bar_page.open()
 			value_before, value_after = progress_bar_page.change_progress_bar_value()
 			assert value_before != value_after, "Значение прогресс бара не было изменено"
+
+	class TestToolTips:
+
+		def test_tool_tips(self, driver):
+			tool_tips_page = ToolTips(driver, "https://demoqa.com/tool-tips")
+			tool_tips_page.open()
+			button_text, field_text, contrary_text, section_text = tool_tips_page.check_tool_tips()
+			assert button_text == "You hovered over the Button", "Текст не отображается или некорректен "
+			assert field_text == "You hovered over the text field", "Текст не отображается или некорректен "
+			assert contrary_text == "You hovered over the Contrary", "Текст не отображается или некорректен "
+			assert section_text == "You hovered over the 1.10.32", "Текст не отображается или некорректен "
+
+

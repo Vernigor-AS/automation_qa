@@ -12,7 +12,7 @@ def pytest_addoption(parser):
     parser.addoption("--driver_name", action="store", default="chrome",
                      help="Specify the driver to use: chrome or firefox.")
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope='session')
 def driver(request):
     driver_name = request.config.getoption("driver_name")
     headless = request.config.getoption("headless")

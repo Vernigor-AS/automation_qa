@@ -79,4 +79,14 @@ class BasePage:
         action.drag_and_drop_by_offset(element, x_coord, y_coord)
         action.perform()
 
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
+    def move_by_offset(self, x_coord, y_coord):
+        action = ActionChains(self.driver)
+        action.move_by_offset(x_coord, y_coord)
+        action.perform()
+
 

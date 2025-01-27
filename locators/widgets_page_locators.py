@@ -42,3 +42,15 @@ class ProgressBarPageLocators:
 
 	PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, "button[id='startStopButton']")
 	PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, "div[class='progress-bar bg-info']")
+
+class ToolTipsPageLocators:
+
+	HOVER_ME_TO_SEE_BUTTON = (By.CSS_SELECTOR, "button[id='toolTipButton']")
+	TOOL_TIP_BUTTON = (By.CSS_SELECTOR, "button[aria-describedby='buttonToolTip']")
+	INPUT_HOVER_ME_TO_SEE = (By.CSS_SELECTOR, "input[id='toolTipTextField']")
+	TOOL_TIP_INPUT = (By.CSS_SELECTOR, "input[aria-describedby='textFieldToolTip']")
+	CONTRARY = (By.XPATH, "//div[@id='texToolTopContainer']//a[(text()='Contrary')]")
+	TOOL_TIP_CONTRARY = (By.CSS_SELECTOR, "a[aria-describedby='contraryTexToolTip']")
+	SECTION = (By.XPATH, "//*[.='1.10.32']")
+	TOOL_TIP_SECTION = (By.CSS_SELECTOR, "a[aria-describedby='sectionToolTip']")
+	TOOL_TIPS_INNERS = (By.CSS_SELECTOR, "div[class='tooltip-inner']")
